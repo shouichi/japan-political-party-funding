@@ -1,0 +1,11 @@
+{
+  "name": "japan-political-party-funding",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:atsuya/japan-political-party-funding.git",
+  "author": "Atsuya Takagi <asoftonight@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "textract": "2.2.0"
+  }
+}
