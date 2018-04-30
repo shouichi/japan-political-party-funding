@@ -9,22 +9,48 @@ const POLITICAL_PARTY_TEXT_PATH = './test/resources/political-party.txt'
 
 describe('PoliticalPartyFormatter', () => {
   let lines
+  let formatter
 
-  beforeEach(() => {
+  before(() => {
     const text =
         fs.readFileSync(POLITICAL_PARTY_TEXT_PATH, { encoding: 'utf8' })
     lines = text.split('\n')
   })
 
-  afterEach(() => {
+  after(() => {
     lines = null
   })
 
+  beforeEach(() => {
+    formatter = new PoliticalPartyFormatter(lines)
+  })
+
+  afterEach(() => {
+    formatter = null
+  })
+
   it('formats political party section', async () => {
-    const formatter = new PoliticalPartyFormatter(lines)
     const result = await formatter.format()
 
     assert.equal(
         result.has(PoliticalPartyFormatter.KOMEITO), true)
+  })
+
+  it('formats category section', async () => {
+    const result = await formatter.format()
+    const komeito = result.get(PoliticalPartyFormatter.KOMEITO)
+
+    assert.equal(
+        komeito.has(PoliticalPartyFormatter.TOTAL_REVENUE), true)
+  })
+
+  it('formats total revenue section', async () => {
+    const result = await formatter.format()
+    const komeito = result.get(PoliticalPartyFormatter.KOMEITO)
+    const totalRevenue = komeito.get(PoliticalPartyFormatter.TOTAL_REVENUE)
+
+    assert.equal(totalRevenue.has('収入総額'), true)
+    assert.equal(totalRevenue.has('前年繰越額'), true)
+    assert.equal(totalRevenue.has('本年収入額'), true)
   })
 })
