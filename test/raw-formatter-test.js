@@ -18,10 +18,10 @@ describe('RawFormatter', () => {
     text = ''
   })
 
-  it.skip('formats a raw text', async () => {
+  it('formats a raw text', async () => {
     const rawFormatter = new RawFormatter(text)
     const report = await rawFormatter.format()
 
-    assert.equal(report.has('politicalParties'), true)
+    assert.equal(report.has(RawFormatter.POLITICAL_PARTY), true)
   })
 })
