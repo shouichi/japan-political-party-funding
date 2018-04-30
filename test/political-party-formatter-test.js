@@ -34,6 +34,20 @@ describe('PoliticalPartyFormatter', () => {
 
     assert.equal(
         result.has(PoliticalPartyFormatter.KOMEITO), true)
+    assert.equal(
+        result.has(PoliticalPartyFormatter.SOCIAL_DEMOCRATIC_PARTY), true)
+    assert.equal(
+        result.has(PoliticalPartyFormatter.LIBERAL_PARTY), true)
+    assert.equal(
+        result.has(PoliticalPartyFormatter.LIBERAL_DEMOCRATIC_PARTY), true)
+    assert.equal(
+        result.has(PoliticalPartyFormatter.NIPPON_ISHIN_NO_KAI), true)
+    assert.equal(
+        result.has(PoliticalPartyFormatter.PARTY_OF_JAPANESE_KOKORO), true)
+    assert.equal(
+        result.has(PoliticalPartyFormatter.JAPANESE_COMMUNIST_PARTY), true)
+    assert.equal(
+        result.has(PoliticalPartyFormatter.DEMOCRATIC_PARTY), true)
   })
 
   it('formats category section', async () => {
