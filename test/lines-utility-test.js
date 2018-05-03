@@ -14,6 +14,8 @@ describe('LinesUtility', () => {
   const oneNameAndOnePrice4 = '機関紙誌の発行その他の事業による収入   ' +
       '310,415,181'
   const donation1 = 'グローバルサイン㈱105,000 渋谷区'
+  const space1 = '宿区 127,800,0002,953.6914.12.17'
+  const space2 = '広島市 91,000,000212.8426. 4. 8'
 
   beforeEach(() => {
     linesUtility = new LinesUtility()
@@ -55,6 +57,20 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareDonation(donation1),
           'グローバルサイン㈱ 105,000 渋谷区')
+    })
+  })
+
+  context('#prepareSpace', () => {
+    it('formats a space line', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareSpace(space1),
+          '宿区 127,800,000 2,953.69 14.12.17')
+    })
+
+    it('formats a space line with short date', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareSpace(space2),
+          '広島市 91,000,000 212.84 26.04.08')
     })
   })
 
