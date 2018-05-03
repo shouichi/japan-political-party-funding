@@ -99,4 +99,12 @@ describe('PoliticalPartyFormatter', () => {
 
     assert.equal(spendingBreakdown.has('経常経費'), true)
   })
+
+  it('formats donation breakdown section', async () => {
+    const komeito = result.get(PoliticalPartyFormatter.KOMEITO)
+    const donationBreakdown =
+        komeito.get(PoliticalPartyFormatter.DONATION_BREAKDOWN)
+
+    assert.equal(donationBreakdown.has('個人分'), true)
+  })
 })
