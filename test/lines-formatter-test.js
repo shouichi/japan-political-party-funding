@@ -17,6 +17,9 @@ describe('LinesFormatter', () => {
     '遺 長友 孝子 12,246,791 足立区',
     '年間五万円以下のもの56,000',
   ]
+  const space = [
+    '広島市 91,000,000 212.84 26.04.08',
+  ]
 
   beforeEach(() => {
     linesFormatter = new LinesFormatter()
@@ -68,6 +71,16 @@ describe('LinesFormatter', () => {
       assert.strictEqual(result[1], '年間五万円以下のもの')
       assert.strictEqual(result[2], 56000)
       assert.strictEqual(result[3], null)
+    })
+  })
+
+  context('#space', () => {
+    it('formats space lines', async () => {
+      let result = await linesFormatter.space(space[0])
+      assert.strictEqual(result[0], '広島市')
+      assert.strictEqual(result[1], 91000000)
+      assert.strictEqual(result[2], 212.84)
+      assert.strictEqual(result[3], '26.04.08')
     })
   })
 })
