@@ -13,6 +13,7 @@ describe('LinesUtility', () => {
   const oneNameAndOnePrice3 = '機関紙誌の発行その他の事業による収入310,415,181'
   const oneNameAndOnePrice4 = '機関紙誌の発行その他の事業による収入   ' +
       '310,415,181'
+  const donation1 = 'グローバルサイン㈱105,000 渋谷区'
 
   beforeEach(() => {
     linesUtility = new LinesUtility()
@@ -46,6 +47,22 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareOneNameAndOnePrice(oneNameAndOnePrice4),
           '機関紙誌の発行その他の事業による収入 310,415,181')
+    })
+  })
+
+  context('#prepareDonation', () => {
+    it('formats a donation line', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareDonation(donation1),
+          'グローバルサイン㈱ 105,000 渋谷区')
+    })
+  })
+
+  context('#parsePrice', () => {
+    it('converts a price in string to a numeric value', async () => {
+      assert.strictEqual(await linesUtility.parsePrice('12,345,678'), 12345678)
+      assert.strictEqual(await linesUtility.parsePrice('12,345'), 12345)
+      assert.strictEqual(await linesUtility.parsePrice('12'), 12)
     })
   })
 })
