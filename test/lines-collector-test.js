@@ -52,13 +52,20 @@ describe('LinesCollector', () => {
     '56,',
     '000',
   ]
-  const land = [
+  const space = [
     '新宿区 552,',
     '200,',
     '000',
     '1,',
     '036.32 ',
     '14.12.17',
+    '静岡県小山町 31,',
+    '324,',
+    '551',
+    '5,',
+    '138 ',
+    '昭和',
+    '58. 1.15',
     '新宿区 543,',
     '600,',
     '000',
@@ -111,11 +118,12 @@ describe('LinesCollector', () => {
     })
   })
 
-  it.skip('collects land lines', async () => {
-    const result = await linesCollector.oneNameAndOneValue(land)
+  it('collects land lines', async () => {
+    const result = await linesCollector.space(space)
 
-    assert.strictEqual(result.length, 2)
+    assert.strictEqual(result.length, 3)
     assert.strictEqual(result[0], '新宿区 552,200,0001,036.3214.12.17')
-    assert.strictEqual(result[1], '新宿区 543,600,0001,003.8714.12.17')
+    assert.strictEqual(result[1], '静岡県小山町 31,324,5515,138昭和58. 1.15')
+    assert.strictEqual(result[2], '新宿区 543,600,0001,003.8714.12.17')
   })
 })
