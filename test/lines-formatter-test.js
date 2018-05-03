@@ -18,7 +18,8 @@ describe('LinesFormatter', () => {
     '年間五万円以下のもの56,000',
   ]
   const space = [
-    '広島市 91,000,000 212.84 26.04.08',
+    '広島市 91,000,000 212.84 平成 26.04.08',
+    '静岡県小山町 31,324,551 5,138 昭和 58.01.15',
   ]
 
   beforeEach(() => {
@@ -80,7 +81,15 @@ describe('LinesFormatter', () => {
       assert.strictEqual(result[0], '広島市')
       assert.strictEqual(result[1], 91000000)
       assert.strictEqual(result[2], 212.84)
-      assert.strictEqual(result[3], '26.04.08')
+      assert.strictEqual(result[3], '平成')
+      assert.strictEqual(result[4], '26.04.08')
+
+      result = await linesFormatter.space(space[1])
+      assert.strictEqual(result[0], '静岡県小山町')
+      assert.strictEqual(result[1], 31324551)
+      assert.strictEqual(result[2], 5138)
+      assert.strictEqual(result[3], '昭和')
+      assert.strictEqual(result[4], '58.01.15')
     })
   })
 })
