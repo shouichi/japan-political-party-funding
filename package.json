@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "simple-logger": "https://github.com/atsuya/simple-logger.git#v0.1.0",
+    "sprintf-js": "1.1.1",
     "textract": "2.2.0",
     "winston": "2.4.1"
   },
