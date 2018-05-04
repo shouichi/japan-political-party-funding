@@ -107,4 +107,12 @@ describe('PoliticalPartyFormatter', () => {
 
     assert.equal(donationBreakdown.has('個人分'), true)
   })
+
+  it('formats asset breakdown section', async () => {
+    const komeito = result.get(PoliticalPartyFormatter.KOMEITO)
+    const assetBreakdown =
+        komeito.get(PoliticalPartyFormatter.ASSET_BREAKDOWN)
+
+    assert.equal(assetBreakdown.has('土地'), true)
+  })
 })
