@@ -30,6 +30,9 @@ describe('LinesFormatter', () => {
   const securityDeposit = [
     'あかつき印刷㈱ 815,000,000 昭和 62.04.01',
   ]
+  const debt = [
+    '社会労働運動家センター 710,000,000',
+  ]
 
   beforeEach(() => {
     linesFormatter = new LinesFormatter()
@@ -126,6 +129,14 @@ describe('LinesFormatter', () => {
       assert.strictEqual(result[1], 815000000)
       assert.strictEqual(result[2], '昭和')
       assert.strictEqual(result[3], '62.04.01')
+    })
+  })
+
+  context('#debt', () => {
+    it('formats debt lines', async () => {
+      let result = await linesFormatter.debt(debt[0])
+      assert.strictEqual(result[0], '社会労働運動家センター')
+      assert.strictEqual(result[1], 710000000)
     })
   })
 })
