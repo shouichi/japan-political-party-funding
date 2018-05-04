@@ -13,10 +13,11 @@ describe('LinesUtility', () => {
   const oneNameAndOnePrice3 = '機関紙誌の発行その他の事業による収入310,415,181'
   const oneNameAndOnePrice4 = '機関紙誌の発行その他の事業による収入   ' +
       '310,415,181'
+  const oneNameAndOnePrice5 = ' 収入総額 20,776,777,975'
   const donation1 = 'グローバルサイン㈱105,000 渋谷区'
-  const space1 = '宿区 127,800,0002,953.6914.12.17'
+  const space1 = '新宿区 552,200,0001,036.32 14.12.17'
   const space2 = '広島市 91,000,000212.8426. 4. 8'
-  const space3 = '静岡県小山町 31,324,5515,138昭和58. 1.15'
+  const space3 = '静岡県小山町 31,324,5515,138 昭和58. 1.15'
   const movableProperty1 =
       '宣伝車用カーナビモニターカメラ(1式)2,181,375 12. 9.28'
 
@@ -53,6 +54,12 @@ describe('LinesUtility', () => {
           await linesUtility.prepareOneNameAndOnePrice(oneNameAndOnePrice4),
           '機関紙誌の発行その他の事業による収入 310,415,181')
     })
+
+    it('formats a line with head space, one name, and one price', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareOneNameAndOnePrice(oneNameAndOnePrice5),
+          '収入総額 20,776,777,975')
+    })
   })
 
   context('#prepareDonation', () => {
@@ -67,7 +74,7 @@ describe('LinesUtility', () => {
     it('formats a space line', async () => {
       assert.strictEqual(
           await linesUtility.prepareSpace(space1),
-          '宿区 127,800,000 2,953.69 平成 14.12.17')
+          '新宿区 552,200,000 1,036.32 平成 14.12.17')
     })
 
     it('formats a space line with short date', async () => {
