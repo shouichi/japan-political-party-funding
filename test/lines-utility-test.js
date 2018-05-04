@@ -21,6 +21,8 @@ describe('LinesUtility', () => {
   const space4 = '新宿区 477,200,000948.5 14.12.17'
   const movableProperty1 =
       '宣伝車用カーナビモニターカメラ(1式)2,181,375 12. 9.28'
+  const securityDeposit1 = '中山 耕一 4,000,000 22. 4.23'
+  const securityDeposit2 = 'あかつき印刷㈱ 815,000,000 昭和62. 4. 1'
 
   beforeEach(() => {
     linesUtility = new LinesUtility()
@@ -99,6 +101,20 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareMovableProperty(movableProperty1),
           '宣伝車用カーナビモニターカメラ(1式) 2,181,375 平成 12.09.28')
+    })
+  })
+
+  context('#prepareSecurityDeposit', () => {
+    it('formats a security deposit line', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareSecurityDeposit(securityDeposit1),
+          '中山耕一 4,000,000 平成 22.04.23')
+    })
+
+    it('formats a security deposit line with era', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareSecurityDeposit(securityDeposit2),
+          'あかつき印刷㈱ 815,000,000 昭和 62.04.01')
     })
   })
 
