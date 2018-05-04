@@ -21,6 +21,12 @@ describe('LinesFormatter', () => {
     '広島市 91,000,000 212.84 平成 26.04.08',
     '静岡県小山町 31,324,551 5,138 昭和 58.01.15',
   ]
+  const movableProperty = [
+    '宣伝車用カーナビモニターカメラ(1式) 2,181,375 平成 12.09.28',
+  ]
+  const savings = [
+    '1,190,000,000',
+  ]
 
   beforeEach(() => {
     linesFormatter = new LinesFormatter()
@@ -90,6 +96,23 @@ describe('LinesFormatter', () => {
       assert.strictEqual(result[2], 5138)
       assert.strictEqual(result[3], '昭和')
       assert.strictEqual(result[4], '58.01.15')
+    })
+  })
+
+  context('#movableProperty', () => {
+    it('formats movable property lines', async () => {
+      let result = await linesFormatter.movableProperty(movableProperty[0])
+      assert.strictEqual(result[0], '宣伝車用カーナビモニターカメラ(1式)')
+      assert.strictEqual(result[1], 2181375)
+      assert.strictEqual(result[2], '平成')
+      assert.strictEqual(result[3], '12.09.28')
+    })
+  })
+
+  context('#savings', () => {
+    it('formats savings lines', async () => {
+      let result = await linesFormatter.savings(savings[0])
+      assert.strictEqual(result[0], 1190000000)
     })
   })
 })
