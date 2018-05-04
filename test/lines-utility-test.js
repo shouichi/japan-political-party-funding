@@ -18,6 +18,7 @@ describe('LinesUtility', () => {
   const space1 = '新宿区 552,200,0001,036.32 14.12.17'
   const space2 = '広島市 91,000,000212.8426. 4. 8'
   const space3 = '静岡県小山町 31,324,5515,138 昭和58. 1.15'
+  const space4 = '新宿区 552,200,000 1,036.32 平和 14.12.17'
   const movableProperty1 =
       '宣伝車用カーナビモニターカメラ(1式)2,181,375 12. 9.28'
 
@@ -87,6 +88,12 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareSpace(space3),
           '静岡県小山町 31,324,551 5,138 昭和 58.01.15')
+    })
+
+    it('formats a space line that is already prepared', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareSpace(space4),
+          '新宿区 552,200,000 1,036.32 平和 14.12.17')
     })
   })
 
