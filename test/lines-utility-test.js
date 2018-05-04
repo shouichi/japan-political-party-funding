@@ -23,6 +23,8 @@ describe('LinesUtility', () => {
       '宣伝車用カーナビモニターカメラ(1式)2,181,375 12. 9.28'
   const securityDeposit1 = '中山 耕一 4,000,000 22. 4.23'
   const securityDeposit2 = 'あかつき印刷㈱ 815,000,000 昭和62. 4. 1'
+  const debt1 = '社会労働運動家センター710,000,000'
+  const debt2 = '金子 徹 56,280,000'
 
   beforeEach(() => {
     linesUtility = new LinesUtility()
@@ -115,6 +117,20 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareSecurityDeposit(securityDeposit2),
           'あかつき印刷㈱ 815,000,000 昭和 62.04.01')
+    })
+  })
+
+  context('#prepareDebt', () => {
+    it('formats a debt line that represents an organization', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareDebt(debt1),
+          '社会労働運動家センター 710,000,000')
+    })
+
+    it('formats a debt line that an individual', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareDebt(debt2),
+          '金子徹 56,280,000')
     })
   })
 
