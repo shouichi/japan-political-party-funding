@@ -42,6 +42,9 @@ describe('LinesFormatter', () => {
   const investment = [
     '㈱広報宣伝総合研究所 1,500,000 平成 06.10.12',
   ]
+  const facilityUse = [
+    '墓地永代使用料 18,000,000 昭和 52.03.03'
+  ]
 
   beforeEach(() => {
     linesFormatter = new LinesFormatter()
@@ -174,6 +177,16 @@ describe('LinesFormatter', () => {
       assert.strictEqual(result[1], 1500000)
       assert.strictEqual(result[2], '平成')
       assert.strictEqual(result[3], '06.10.12')
+    })
+  })
+
+  context('#facilityUse', () => {
+    it('formats facility use lines', async () => {
+      let result = await linesFormatter.facilityUse(facilityUse[0])
+      assert.strictEqual(result[0], '墓地永代使用料')
+      assert.strictEqual(result[1], 18000000)
+      assert.strictEqual(result[2], '昭和')
+      assert.strictEqual(result[3], '52.03.03')
     })
   })
 })
