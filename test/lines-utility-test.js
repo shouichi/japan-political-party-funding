@@ -26,6 +26,7 @@ describe('LinesUtility', () => {
   const debt1 = '社会労働運動家センター710,000,000'
   const debt2 = '金子 徹 56,280,000'
   const security1 = '利付国債 200,000,00028. 4.15'
+  const lending1 = 'かつき印刷㈱ 761,200,000'
 
   beforeEach(() => {
     linesUtility = new LinesUtility()
@@ -140,6 +141,14 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareSecurity(security1),
           '利付国債 200,000,000 平成 28.04.15')
+    })
+  })
+
+  context('#prepareLending', () => {
+    it('formats a lending line', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareLending(lending1),
+          'かつき印刷㈱ 761,200,000')
     })
   })
 
