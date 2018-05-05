@@ -37,7 +37,10 @@ describe('LinesFormatter', () => {
     '利付国債 200,000,000 平成 28.04.15',
   ]
   const lending = [
-    'かつき印刷㈱ 761,200,000'
+    'かつき印刷㈱ 761,200,000',
+  ]
+  const investment = [
+    '㈱広報宣伝総合研究所 1,500,000 平成 06.10.12',
   ]
 
   beforeEach(() => {
@@ -161,6 +164,16 @@ describe('LinesFormatter', () => {
       let result = await linesFormatter.lending(lending[0])
       assert.strictEqual(result[0], 'かつき印刷㈱')
       assert.strictEqual(result[1], 761200000)
+    })
+  })
+
+  context('#investment', () => {
+    it('formats investment lines', async () => {
+      let result = await linesFormatter.investment(investment[0])
+      assert.strictEqual(result[0], '㈱広報宣伝総合研究所')
+      assert.strictEqual(result[1], 1500000)
+      assert.strictEqual(result[2], '平成')
+      assert.strictEqual(result[3], '06.10.12')
     })
   })
 })
