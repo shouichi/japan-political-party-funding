@@ -27,6 +27,8 @@ describe('LinesUtility', () => {
   const debt2 = '金子 徹 56,280,000'
   const security1 = '利付国債 200,000,00028. 4.15'
   const lending1 = 'かつき印刷㈱ 761,200,000'
+  const investment1 = '㈱広報宣伝総合研究所1,500,000 6.10.12'
+  const investment2 = '㈱印刷センター 134,877,750 9. 5. 8'
 
   beforeEach(() => {
     linesUtility = new LinesUtility()
@@ -149,6 +151,17 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareLending(lending1),
           'かつき印刷㈱ 761,200,000')
+    })
+  })
+
+  context('#prepareInvestment', () => {
+    it('formats a investment line', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareInvestment(investment1),
+          '㈱広報宣伝総合研究所 1,500,000 平成 06.10.12')
+      assert.strictEqual(
+          await linesUtility.prepareInvestment(investment2),
+          '㈱印刷センター 134,877,750 平成 09.05.08')
     })
   })
 
