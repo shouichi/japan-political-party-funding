@@ -29,6 +29,7 @@ describe('LinesUtility', () => {
   const lending1 = 'かつき印刷㈱ 761,200,000'
   const investment1 = '㈱広報宣伝総合研究所1,500,000 6.10.12'
   const investment2 = '㈱印刷センター 134,877,750 9. 5. 8'
+  const facilityUse1 = '墓地永代使用料 18,000,000 昭和52. 3. 3'
 
   beforeEach(() => {
     linesUtility = new LinesUtility()
@@ -162,6 +163,14 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareInvestment(investment2),
           '㈱印刷センター 134,877,750 平成 09.05.08')
+    })
+  })
+
+  context('#prepareFacilityUse', () => {
+    it('formats a facility use line', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareFacilityUse(facilityUse1),
+          '墓地永代使用料 18,000,000 昭和 52.03.03')
     })
   })
 
