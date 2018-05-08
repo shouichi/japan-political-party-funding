@@ -6,6 +6,9 @@ This project parses documents publicly available from Japanese Government with r
 # How to run
 
 ```
-$ $(yarn bin)/textract <file path> > extracted.txt
-$ node parse.js extracted.txt parsed.json
+$ node pdf2json.js test/resources/h28-report-1.pdf
 ```
+
+# Sample Result
+
+This is a [result](https://raw.githubusercontent.com/atsuya/japan-political-party-funding/master/samples/h28-political-party.json) of `pdf2json` for H28 report. Note that it only outputs political party sections at the moment (support for other sections to come later).
