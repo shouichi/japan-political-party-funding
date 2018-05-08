@@ -6,14 +6,13 @@ const LinesUtility = require('../lib/lines-utility')
 
 describe('LinesUtility', () => {
   let linesUtility
-  const oneNameAndOnePrice1 = '平成年月日木曜日(号外第号)官報 機関紙誌の発行' +
-      'その他の事業による収入 310,415,181'
-  const oneNameAndOnePrice2 = '平成年月日木曜日(号外第号)官報 機関紙誌の発行' +
-      'その他の事業による収入310,415,181'
+  const oneNameAndOnePrice1 = 'その他の事業による収入 310,415,181'
+  const oneNameAndOnePrice2 = 'その他の事業による収入310,415,181'
   const oneNameAndOnePrice3 = '機関紙誌の発行その他の事業による収入310,415,181'
   const oneNameAndOnePrice4 = '機関紙誌の発行その他の事業による収入   ' +
       '310,415,181'
   const oneNameAndOnePrice5 = ' 収入総額 20,776,777,975'
+  const oneNameAndOnePrice6 = '個人の党費・会費(462,085人) 1,315,233,000'
   const donation1 = 'グローバルサイン㈱105,000 渋谷区'
   const space1 = '新宿区 552,200,0001,036.32 14.12.17'
   const space2 = '広島市 91,000,000212.8426. 4. 8'
@@ -44,13 +43,13 @@ describe('LinesUtility', () => {
         async () => {
           assert.strictEqual(
               await linesUtility.prepareOneNameAndOnePrice(oneNameAndOnePrice1),
-              '機関紙誌の発行その他の事業による収入 310,415,181')
+              'その他の事業による収入 310,415,181')
     })
 
     it('formats a line with multiple names and one price', async () => {
       assert.strictEqual(
           await linesUtility.prepareOneNameAndOnePrice(oneNameAndOnePrice2),
-          '機関紙誌の発行その他の事業による収入 310,415,181')
+          'その他の事業による収入 310,415,181')
     })
 
     it('formats a line with one name and one price', async () => {
@@ -69,6 +68,12 @@ describe('LinesUtility', () => {
       assert.strictEqual(
           await linesUtility.prepareOneNameAndOnePrice(oneNameAndOnePrice5),
           '収入総額 20,776,777,975')
+    })
+
+    it('formats a line with one name, some number, and one price', async () => {
+      assert.strictEqual(
+          await linesUtility.prepareOneNameAndOnePrice(oneNameAndOnePrice6),
+          '個人の党費・会費(462,085人) 1,315,233,000')
     })
   })
 
