@@ -10,6 +10,7 @@ describe('LinesFormatter', () => {
     '収入総額 20,776,777,975',
     '前年繰越額 6,944,786,625',
     '本年収入額 13,831,991,350',
+    '個人の党費・会費(462,085人) 1,315,233,000',
   ]
   const donation = [
     '小畑 泰治 500,000 越谷市',
@@ -56,18 +57,21 @@ describe('LinesFormatter', () => {
 
   context('#oneNameAndOnePrice', () => {
     it('formats name and price lines', async () => {
-      const totalRevenue =
-          await linesFormatter.oneNameAndOnePrice(nameAndPrice[0])
-      assert.strictEqual(totalRevenue[0], '収入総額')
-      assert.strictEqual(totalRevenue[1], 20776777975)
+      let result = await linesFormatter.oneNameAndOnePrice(nameAndPrice[0])
+      assert.strictEqual(result[0], '収入総額')
+      assert.strictEqual(result[1], 20776777975)
 
-      const carryOver = await linesFormatter.oneNameAndOnePrice(nameAndPrice[1])
-      assert.strictEqual(carryOver[0], '前年繰越額')
-      assert.strictEqual(carryOver[1], 6944786625)
+      result = await linesFormatter.oneNameAndOnePrice(nameAndPrice[1])
+      assert.strictEqual(result[0], '前年繰越額')
+      assert.strictEqual(result[1], 6944786625)
 
-      const thisYear = await linesFormatter.oneNameAndOnePrice(nameAndPrice[2])
-      assert.strictEqual(thisYear[0], '本年収入額')
-      assert.strictEqual(thisYear[1], 13831991350)
+      result = await linesFormatter.oneNameAndOnePrice(nameAndPrice[2])
+      assert.strictEqual(result[0], '本年収入額')
+      assert.strictEqual(result[1], 13831991350)
+
+      result = await linesFormatter.oneNameAndOnePrice(nameAndPrice[3])
+      assert.strictEqual(result[0], '個人の党費・会費(462,085人)')
+      assert.strictEqual(result[1], 1315233000)
     })
   })
 
